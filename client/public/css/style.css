@@ -1,0 +1,97 @@
+/* 隱藏 Logo 直到動畫結束 */
+#main-logo {
+    opacity: 0;
+    color: white; /* 初始全白 */
+    transition: opacity 1s ease-out;
+}
+
+/* 圓環動畫：逆時針轉一圈 */
+.loading-ring {
+    position: absolute;
+    width: 150px; /* 設置環的大小 */
+    height: 150px;
+    border: 5px solid transparent;
+    border-top-color: white;
+    border-radius: 50%;
+    /* 逆時針轉 360 度，持續 1.5 秒 */
+    animation: ringSpin 1.5s ease-out forwards; 
+    /* 初始隱藏，由 JS 控制顯示 */
+    opacity: 0; 
+}
+
+@keyframes ringSpin {
+    0% { transform: rotate(0deg); opacity: 1; }
+    100% { transform: rotate(-360deg); opacity: 1; }
+}
+
+/* JS 將在動畫結束後添加 'loaded' class */
+#main-logo-container.loaded #main-logo {
+    opacity: 1; /* 淡入顯示 */
+}
+
+
+/* 基本按鈕樣式 */
+.feature-button {
+    position: relative;
+    overflow: hidden; /* 確保圓餅圖不會溢出 */
+    /* ... 基礎樣式 (顏色, 邊框, 大小) ... */
+    transition: background-color 0.3s, filter 0.1s;
+}
+
+/* 按鈕文字初始隱藏 (被圓餅圖蓋住或 opacity: 0) */
+.feature-button .button-text {
+    opacity: 0; 
+    transition: opacity 0.5s 1.5s; /* 延遲顯示，等圓餅圖動畫結束 */
+    z-index: 2; /* 確保文字在圓餅圖之上 */
+}
+
+/* 圓餅圖樣式 (作為偽元素) */
+.loading-pie {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: white; /* 圓餅圖的顏色 */
+    opacity: 1;
+    z-index: 1;
+    clip-path: circle(0% at 50% 50%); /* 初始為 0% 圓形 */
+    transition: opacity 0.5s 0.2s; /* 淡出效果 */
+}
+
+/* 滾動動畫觸發的 class */
+.feature-button.animate .loading-pie {
+    /* 使用一個變數來控制圓餅圖從 0% 到 100% 的填充 */
+    animation: pieFill 1.5s ease-in-out forwards; 
+}
+
+@keyframes pieFill {
+    /* 這裡需要更複雜的動畫技巧，例如用 transform: rotate 和 clip-path */
+    /* 簡化思路：使用一個大圓形遮罩縮放 */
+    0% { clip-path: circle(0% at 50% 50%); }
+    100% { clip-path: circle(70% at 50% 50%); } /* 讓圓餅圖填滿按鈕 */
+}
+
+/* 閃爍動畫 (故障閃爍效果) */
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+}
+
+.feature-button.animate-complete .loading-pie {
+    /* 故障閃爍 */
+    animation: flicker 0.1s steps(1) 2, fadeOut 0.5s 0.2s forwards; 
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; }
+}
+
+.feature-button.animate-complete .button-text {
+    opacity: 1;
+}
+
+/* 按鈕互動效果 */
+.feature-button:hover {
+    background-color: #ffffff1a; /* 反白效果 */
+}
+.feature-button:active {
+    filter: brightness(0.8); /* 點擊減少亮度 */
+}
