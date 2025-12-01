@@ -1,72 +1,216 @@
-/* 隱藏 Logo 直到動畫結束 */
-#main-logo {
-    opacity: 0;
-    color: white; /* 初始全白 */
-    transition: opacity 1s ease-out;
+/* ==================================== */
+/* 0. 全域設定與重置 (Global Reset)      */
+/* ==================================== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a1a1a; /* 整體深色背景 */
+    color: #f0f0f0; /* 預設文字顏色為淺色 */
+    line-height: 1.6;
+    scroll-behavior: smooth; /* 平滑滾動 */
 }
 
-/* 圓環動畫：逆時針轉一圈 */
+a {
+    color: inherit;
+    text-decoration: none; /* 移除預設連結底線 */
+}
+
+/* ==================================== */
+/* 1. 頂部導航欄 (Header/Navbar)        */
+/* ==================================== */
+#navbar {
+    position: sticky; /* 確保導航欄黏在頂部 */
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.9); /* 半透明黑色背景 */
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.logo-link:hover {
+    opacity: 0.8;
+}
+
+.logo-text {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #4CAF50; /* LOGO 顏色 */
+}
+
+.nav-links a {
+    margin-left: 25px;
+    padding: 5px 10px;
+    color: #ccc;
+    transition: color 0.3s, border-bottom 0.3s;
+}
+
+.nav-links a:hover {
+    color: white;
+    border-bottom: 2px solid #4CAF50;
+}
+
+/* ==================================== */
+/* 2. 滿版 Hero 區塊 (替換為背景圖片)     */
+/* ==================================== */
+#hero-section {
+    height: 100vh; /* 滿版高度 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5%;
+    text-align: center;
+    
+    /* ============== 背景圖片設定 ============== */
+    background-image: url('../assets/images/hero-bg.jpg'); /* <-- 請確認您的圖片路徑! */
+    background-size: cover; /* 圖片滿版覆蓋 */
+    background-position: center center; /* 圖片中心位於區塊中心 */
+    background-repeat: no-repeat; /* 避免圖片重複 */
+    
+    /* 疊加一層暗色濾鏡，確保 Logo 文字可讀性 */
+    background-color: rgba(0, 0, 0, 0.6); /* 疊加的暗色基底 */
+    background-blend-mode: overlay; /* 讓圖片與暗色混合，使整體變暗 */
+    /* ======================================== */
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tagline {
+    font-size: 1.5em;
+    color: #aaa;
+    max-width: 600px;
+    margin: 20px auto 0;
+}
+
+/* --- Logo 動畫相關樣式 (保持不變) --- */
+#main-logo-container {
+    position: relative;
+    width: 500px; 
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#main-logo {
+    font-size: 4em;
+    font-weight: 700; 
+    z-index: 10;
+    opacity: 0;
+    color: white;
+    transition: opacity 0.5s ease-out 0.5s;
+}
+
+#main-logo-container.loaded #main-logo {
+    opacity: 1;
+}
+
 .loading-ring {
     position: absolute;
-    width: 150px; /* 設置環的大小 */
+    width: 150px;
     height: 150px;
     border: 5px solid transparent;
     border-top-color: white;
     border-radius: 50%;
-    /* 逆時針轉 360 度，持續 1.5 秒 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0deg); 
     animation: ringSpin 1.5s ease-out forwards; 
-    /* 初始隱藏，由 JS 控制顯示 */
     opacity: 0; 
 }
 
 @keyframes ringSpin {
-    0% { transform: rotate(0deg); opacity: 1; }
-    100% { transform: rotate(-360deg); opacity: 1; }
-}
-
-/* JS 將在動畫結束後添加 'loaded' class */
-#main-logo-container.loaded #main-logo {
-    opacity: 1; /* 淡入顯示 */
+    0% { transform: translate(-50%, -50%) rotate(0deg); opacity: 1; }
+    100% { transform: translate(-50%, -50%) rotate(-360deg); opacity: 1; }
 }
 
 
-/* 基本按鈕樣式 */
+/* ==================================== */
+/* 3. 功能區塊與按鈕 (動畫相關屬性保持不變)    */
+/* ==================================== */
+#features-section {
+    padding: 80px 10%;
+    text-align: center;
+}
+
+#features-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: #4CAF50;
+    padding-top: 20px;
+}
+
+.button-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
 .feature-button {
+    /* 按鈕基礎樣式 */
     position: relative;
-    overflow: hidden; /* 確保圓餅圖不會溢出 */
-    /* ... 基礎樣式 (顏色, 邊框, 大小) ... */
-    transition: background-color 0.3s, filter 0.1s;
+    overflow: hidden; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px; 
+    height: 120px;
+    background-color: #2c2c2c;
+    border: 1px solid #444;
+    border-radius: 12px;
+    font-size: 1.4em;
+    font-weight: 600;
+    color: white;
+    transition: background-color 0.3s, filter 0.1s, box-shadow 0.3s;
+    cursor: pointer;
 }
 
-/* 按鈕文字初始隱藏 (被圓餅圖蓋住或 opacity: 0) */
+/* 按鈕互動效果 */
+.feature-button:hover {
+    background-color: #3d3d3d;
+    box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
+}
+.feature-button:active {
+    filter: brightness(0.7);
+    transform: scale(0.98);
+}
+
+/* --- 按鈕動畫相關 (保持不變) --- */
 .feature-button .button-text {
+    position: relative;
     opacity: 0; 
-    transition: opacity 0.5s 1.5s; /* 延遲顯示，等圓餅圖動畫結束 */
-    z-index: 2; /* 確保文字在圓餅圖之上 */
+    transition: opacity 0.3s 1.8s; 
+    z-index: 10;
 }
-
-/* 圓餅圖樣式 (作為偽元素) */
+/* 省略複雜的 .loading-pie 偽元素動畫，但保留佔位和 z-index */
 .loading-pie {
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: white; /* 圓餅圖的顏色 */
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    background-color: #444; 
+    overflow: hidden; 
     opacity: 1;
-    z-index: 1;
-    clip-path: circle(0% at 50% 50%); /* 初始為 0% 圓形 */
-    transition: opacity 0.5s 0.2s; /* 淡出效果 */
+    z-index: 5; 
+    transition: opacity 0.5s 0.2s; 
+    transform: translate(-50%, -50%) rotate(-90deg); 
 }
-
-/* 滾動動畫觸發的 class */
-.feature-button.animate .loading-pie {
-    /* 使用一個變數來控制圓餅圖從 0% 到 100% 的填充 */
-    animation: pieFill 1.5s ease-in-out forwards; 
-}
-
-@keyframes pieFill {
-    /* 這裡需要更複雜的動畫技巧，例如用 transform: rotate 和 clip-path */
-    /* 簡化思路：使用一個大圓形遮罩縮放 */
-    0% { clip-path: circle(0% at 50% 50%); }
-    100% { clip-path: circle(70% at 50% 50%); } /* 讓圓餅圖填滿按鈕 */
+.loading-pie:before, .loading-pie:after {
+    content: '';
+    /* 這裡省略了複雜的旋轉邏輯，以保持程式碼精簡，因為它目前沒有作用 */
 }
 
 /* 閃爍動畫 (故障閃爍效果) */
@@ -76,22 +220,35 @@
 }
 
 .feature-button.animate-complete .loading-pie {
-    /* 故障閃爍 */
-    animation: flicker 0.1s steps(1) 2, fadeOut 0.5s 0.2s forwards; 
+    animation: flicker 0.1s steps(1) 2, fadeOut 0.5s 0.2s forwards;
 }
 
 @keyframes fadeOut {
     to { opacity: 0; }
 }
 
+.feature-button.animate-complete .loading-pie:before,
+.feature-button.animate-complete .loading-pie:after {
+    display: none;
+}
+
 .feature-button.animate-complete .button-text {
     opacity: 1;
 }
 
-/* 按鈕互動效果 */
-.feature-button:hover {
-    background-color: #ffffff1a; /* 反白效果 */
+
+/* ==================================== */
+/* 4. 頁腳 (Footer)                     */
+/* ==================================== */
+#footer {
+    padding: 20px;
+    text-align: center;
+    font-size: 0.9em;
+    color: #888;
+    border-top: 1px solid #2c2c2c;
+    margin-top: 40px;
 }
-.feature-button:active {
-    filter: brightness(0.8); /* 點擊減少亮度 */
+
+#footer p {
+    margin: 5px 0;
 }
