@@ -189,7 +189,7 @@ a {
 .feature-button .button-text {
     position: relative;
     opacity: 0; 
-    transition: opacity 0.3s 1.8s; 
+    transition: opacity 0.3s 0.5s; 
     z-index: 10;
 }
 /* 省略複雜的 .loading-pie 偽元素動畫，但保留佔位和 z-index */
