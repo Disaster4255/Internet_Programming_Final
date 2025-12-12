@@ -9,13 +9,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const transitionToRed = () => {
         state = 'red';
-        container.style.backgroundColor = '#1a1a1a'; // 確保背景是暗色
+        container.style.backgroundColor = '#1a1a1a';
         message.textContent = '';
         indicator.style.backgroundColor = 'red';
         indicator.textContent = '等待中';
         
-        // 隨機延遲 1 到 5 秒
-        const delay = Math.random() * 4000 + 1000; // 1000ms (1s) 到 5000ms (5s)
+        // **修正：隨機延遲 1 到 3 秒**
+        const delay = Math.random() * 2000 + 1000; // 1000ms (1s) 到 3000ms (3s)
         
         timeoutId = setTimeout(transitionToGreen, delay);
     };
@@ -35,18 +35,19 @@ document.addEventListener('DOMContentLoaded', () => {
         indicator.style.backgroundColor = 'red';
         message.textContent = '太快了，重新點擊一次以重來';
         indicator.textContent = '❌';
-        indicator.style.transition = 'none'; // 移除過渡，使顏色立即變化
+        indicator.style.transition = 'none';
     };
 
     const handleResultClick = () => {
         if (state === 'green') {
             // 正常計時結束
             const endTime = performance.now();
-            const reactionTime = (endTime - startTime); // 毫秒
+            const reactionTime = Math.round(endTime - startTime); // **修正：四捨五入到最接近的毫秒**
             
             state = 'result';
             indicator.style.backgroundColor = '#4CAF50';
-            message.textContent = `你的反應時間是: ${(reactionTime / 1000).toFixed(3)} 秒`;
+            // **修正：顯示單位為毫秒 (ms)**
+            message.textContent = `你的反應時間是: ${reactionTime} 毫秒`; 
             indicator.textContent = '✅';
             
         } else if (state === 'red') {
