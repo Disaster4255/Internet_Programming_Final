@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>簡易計算機 - 🎮 大雜燴</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    #footer{display:none;}
+    .tool-wrap{max-width:980px;margin:0 auto;padding:40px 20px 80px;}
+    .tool-title{text-align:center;font-size:2.2em;color:#4CAF50;margin:10px 0 30px;}
+    .calc{
+      max-width:420px;margin:0 auto;
+      background:#222;border:1px solid #333;border-radius:16px;
+      box-shadow:0 8px 20px rgba(0,0,0,.35);
+      overflow:hidden;
+    }
+    .screen{
+      background:#111;border-bottom:1px solid #333;
+      padding:18px 16px;
+      min-height:86px;
+      display:flex;flex-direction:column;gap:6px;
+    }
+    .expr{color:#aaa;font-size:1.0em;min-height:22px;word-break:break-all;}
+    .value{font-size:2.1em;font-weight:800;text-align:right;word-break:break-all;}
+    .keys{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:10px;
+      padding:14px;
+      background:#1a1a1a;
+    }
+    button.key{
+      border-radius:14px;
+      border:1px solid #444;
+      background:#2c2c2c;
+      color:#fff;
+      padding:14px 0;
+      font-size:1.1em;
+      font-weight:700;
+      cursor:pointer;
+      transition:.2s;
+    }
+    button.key:hover{box-shadow:0 0 15px rgba(76,175,80,.25);border-color:#4CAF50;}
+    button.key:active{transform:scale(.98);filter:brightness(.9);}
+    button.key.wide{grid-column: span 2;}
+    .hint{max-width:420px;margin:14px auto 0;color:#aaa;line-height:1.6;font-size:.95em;text-align:center;}
+  </style>
+</head>
+<body>
+  <header id="navbar">
+    <div class="logo-area">
+      <a href="index.html" class="logo-link">
+        <span class="logo-text">🎮 大雜燴</span>
+      </a>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html#games">小遊戲</a>
+      <a href="index.html#tools">實用工具</a>
+      <a href="reaction-test.html">反應力測試</a>
+    </nav>
+  </header>
+
+  <main class="tool-wrap">
+    <h1 class="tool-title">🧮 簡易計算機</h1>
+
+    <section class="calc" aria-label="calculator">
+      <div class="screen">
+        <div class="expr" id="expr"></div>
+        <div class="value" id="display">0</div>
+      </div>
+
+      <div class="keys">
+        <button class="key" data-action="clear">C</button>
+        <button class="key" data-action="back">⌫</button>
+        <button class="key" data-action="percent">%</button>
+        <button class="key" data-op="/">÷</button>
+
+        <button class="key" data-num="7">7</button>
+        <button class="key" data-num="8">8</button>
+        <button class="key" data-num="9">9</button>
+        <button class="key" data-op="*">×</button>
+
+        <button class="key" data-num="4">4</button>
+        <button class="key" data-num="5">5</button>
+        <button class="key" data-num="6">6</button>
+        <button class="key" data-op="-">−</button>
+
+        <button class="key" data-num="1">1</button>
+        <button class="key" data-num="2">2</button>
+        <button class="key" data-num="3">3</button>
+        <button class="key" data-op="+">+</button>
+
+        <button class="key wide" data-num="0">0</button>
+        <button class="key" data-action="dot">.</button>
+        <button class="key" data-action="equal">=</button>
+      </div>
+    </section>
+
+    <div class="hint">
+      支援鍵盤輸入：數字、+ - * /、Enter =、Backspace、Esc 清除
+    </div>
+  </main>
+
+  <script src="js/calculator.js"></script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>隨機分組器 - 🎮 大雜燴</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        /* 工具頁面通用版面 */
+        .tool-wrap{
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+        .tool-title{
+            text-align:center;
+            font-size: 2.2em;
+            color:#4CAF50;
+            margin: 10px 0 30px;
+        }
+        .card{
+            background:#222;
+            border:1px solid #333;
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 8px 20px rgba(0,0,0,.35);
+        }
+        .grid{
+            display:grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 18px;
+        }
+        @media (max-width: 860px){
+            .grid{ grid-template-columns: 1fr; }
+        }
+        label{ display:block; margin: 8px 0 6px; color:#ddd; }
+        textarea, input, select{
+            width: 100%;
+            box-sizing:border-box;
+            border-radius: 10px;
+            border: 1px solid #444;
+            background:#1a1a1a;
+            color:#f0f0f0;
+            padding: 10px 12px;
+            font-size: 1em;
+            outline: none;
+        }
+        textarea{ min-height: 240px; resize: vertical; }
+        .row{
+            display:flex;
+            gap: 10px;
+            align-items:center;
+            flex-wrap: wrap;
+        }
+        .btn{
+            background:#2c2c2c;
+            border:1px solid #444;
+            color:#fff;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor:pointer;
+            transition: .2s;
+        }
+        .btn:hover{ box-shadow: 0 0 15px rgba(76, 175, 80, .35); border-color:#4CAF50; }
+        .btn:active{ transform: scale(.98); filter: brightness(.9); }
+
+        .hint{ color:#aaa; font-size:.95em; margin-top: 8px; line-height: 1.6; }
+
+        .out{
+            margin-top: 14px;
+            display:grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        @media (max-width: 860px){
+            .out{ grid-template-columns: 1fr; }
+        }
+        .group{
+            background:#1a1a1a;
+            border:1px solid #333;
+            border-radius: 12px;
+            padding: 12px;
+        }
+        .group h3{
+            margin: 0 0 8px;
+            font-size: 1.1em;
+            color:#4CAF50;
+        }
+        .pill{
+            display:inline-block;
+            background:#2c2c2c;
+            border:1px solid #3a3a3a;
+            border-radius: 999px;
+            padding: 6px 10px;
+            margin: 6px 6px 0 0;
+            font-size:.95em;
+        }
+
+        /* 隱藏主頁 footer */
+        #footer { display:none; }
+    </style>
+</head>
+<body>
+    <header id="navbar">
+        <div class="logo-area">
+            <a href="index.html" class="logo-link">
+                <span class="logo-text">🎮 大雜燴</span>
+            </a>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html#games">小遊戲</a>
+            <a href="index.html#tools">實用工具</a>
+            <a href="reaction-test.html">反應力測試</a>
+        </nav>
+    </header>
+
+    <main class="tool-wrap">
+        <h1 class="tool-title">👥 隨機分組器</h1>
+
+        <div class="grid">
+            <section class="card">
+                <label for="names">名單（每行一個名字，或用逗號 / 空白分隔）</label>
+                <textarea id="names" placeholder="例如：
+小明
+小美
+阿哲
+..."></textarea>
+
+                <div class="hint">
+                    小技巧：你可以直接貼上全班名單；系統會自動去掉空白行與多餘空格，並且避免空名字。
+                </div>
+            </section>
+
+            <section class="card">
+                <label>分組方式</label>
+                <div class="row">
+                    <select id="mode" aria-label="mode">
+                        <option value="groupCount">指定「組數」</option>
+                        <option value="groupSize">指定「每組人數」</option>
+                    </select>
+                </div>
+
+                <div style="height:10px"></div>
+
+                <div id="groupCountBox">
+                    <label for="groupCount">組數</label>
+                    <input id="groupCount" type="number" min="1" value="4" />
+                </div>
+
+                <div id="groupSizeBox" style="display:none">
+                    <label for="groupSize">每組人數</label>
+                    <input id="groupSize" type="number" min="1" value="4" />
+                </div>
+
+                <div style="height:12px"></div>
+
+                <label>
+                    <input id="keepOrder" type="checkbox" />
+                    不要亂數（保留原順序）
+                </label>
+
+                <div style="height:14px"></div>
+
+                <div class="row">
+                    <button class="btn" id="btnSplit">開始分組</button>
+                    <button class="btn" id="btnCopy">複製結果</button>
+                    <button class="btn" id="btnClear">清空</button>
+                </div>
+
+                <div class="hint" id="status"></div>
+            </section>
+        </div>
+
+        <section class="out" id="output" aria-live="polite"></section>
+    </main>
+
+    <script src="js/group-divider.js"></script>
+</body>
+</html>

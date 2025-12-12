@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>計時器 - 🎮 大雜燴</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    #footer{display:none;}
+    .tool-wrap{max-width:980px;margin:0 auto;padding:40px 20px 80px;}
+    .tool-title{text-align:center;font-size:2.2em;color:#4CAF50;margin:10px 0 30px;}
+    .card{
+      max-width:720px;margin:0 auto;
+      background:#222;border:1px solid #333;border-radius:16px;
+      box-shadow:0 8px 20px rgba(0,0,0,.35);
+      padding:18px;
+    }
+    .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center;}
+    .time-input{
+      display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;
+      margin: 8px 0 14px;
+    }
+    .field{
+      width:110px;
+      background:#1a1a1a;border:1px solid #444;border-radius:12px;
+      padding:10px 12px;color:#fff;
+      display:flex;flex-direction:column;gap:6px;
+    }
+    .field label{color:#aaa;font-size:.9em;}
+    .field input{
+      width:100%;
+      border:0;background:transparent;color:#fff;
+      font-size:1.2em;font-weight:800;outline:none;
+    }
+    .display{
+      text-align:center;
+      font-size:4em;
+      font-weight:900;
+      letter-spacing:.06em;
+      margin: 10px 0 16px;
+    }
+    .btn{
+      background:#2c2c2c;border:1px solid #444;color:#fff;
+      padding:10px 14px;border-radius:12px;
+      font-size:1em;font-weight:700;cursor:pointer;transition:.2s;
+      min-width:120px;
+    }
+    .btn:hover{box-shadow:0 0 15px rgba(76,175,80,.25);border-color:#4CAF50;}
+    .btn:active{transform:scale(.98);filter:brightness(.9);}
+    .hint{color:#aaa;text-align:center;line-height:1.6;margin-top:10px;}
+    .progress{
+      height:10px;background:#1a1a1a;border:1px solid #333;border-radius:999px;
+      overflow:hidden;margin: 6px 0 10px;
+    }
+    .bar{height:100%;width:0%;background:#4CAF50;}
+  </style>
+</head>
+<body>
+  <header id="navbar">
+    <div class="logo-area">
+      <a href="index.html" class="logo-link">
+        <span class="logo-text">🎮 大雜燴</span>
+      </a>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html#games">小遊戲</a>
+      <a href="index.html#tools">實用工具</a>
+      <a href="reaction-test.html">反應力測試</a>
+    </nav>
+  </header>
+
+  <main class="tool-wrap">
+    <h1 class="tool-title">⏱️ 計時器</h1>
+
+    <section class="card">
+      <div class="time-input">
+        <div class="field">
+          <label for="min">分鐘</label>
+          <input id="min" type="number" min="0" value="1" />
+        </div>
+        <div class="field">
+          <label for="sec">秒</label>
+          <input id="sec" type="number" min="0" max="59" value="0" />
+        </div>
+      </div>
+
+      <div class="display" id="display">01:00</div>
+
+      <div class="progress" aria-label="progress">
+        <div class="bar" id="bar"></div>
+      </div>
+
+      <div class="row">
+        <button class="btn" id="start">開始</button>
+        <button class="btn" id="pause">暫停</button>
+        <button class="btn" id="reset">重設</button>
+      </div>
+
+      <div class="hint" id="hint">
+        支援鍵盤：Space 開始/暫停、R 重設
+      </div>
+    </section>
+  </main>
+
+  <script src="js/timer.js"></script>
+</body>
+</html>
