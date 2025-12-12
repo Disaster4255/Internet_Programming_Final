@@ -31,12 +31,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     button.classList.add('animate');
                     
                     // 2. 圓餅圖動畫結束後，觸發閃爍和文字顯示
-                    // 這裡需要根據 CSS 中的動畫時間來設定延遲 (例如 1.5s 填充 + 0.1s 閃爍)
+                    // 這裡的 1500ms 應對應 CSS 中的動畫持續時間
                     setTimeout(() => {
                         button.classList.add('animate-complete');
                         // 標記為已動畫，避免重複播放
                         button.classList.add('animated'); 
-                    }, 1500); // 這裡的 1500ms 應對應 CSS 中的 pieFill 動畫持續時間
+                    }, 1500); 
 
                     // 停止觀察，因為動畫已經完成
                     observer.unobserve(button); 

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>反應力測試 - 🎮 Project X</title>
+    <link rel="stylesheet" href="css/style.css"> 
+    <style>
+        /* 測試頁面專屬樣式 */
+        #test-container {
+            height: calc(100vh - 70px); /* 扣除 navbar 高度 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            cursor: pointer; 
+            background-color: #1a1a1a;
+            transition: background-color 0.2s;
+            overflow: hidden;
+        }
+        
+        /* 隱藏 Footer */
+        #footer { display: none; }
+
+        #test-indicator {
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
+            background-color: transparent; /* 初始透明 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2em;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        #test-message {
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <header id="navbar">
+        <div class="logo-area">
+            <a href="index.html" class="logo-link">
+                <span class="logo-text">🎮 Project X</span>
+            </a>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html#games">回主頁遊戲</a>
+            <a href="index.html#tools">回主頁工具</a>
+        </nav>
+    </header>
+
+    <div id="test-container">
+        <h1 id="test-message">點擊畫面中心以開始</h1>
+        <div id="test-indicator"></div>
+    </div>
+    
+    <script src="js/reaction-test.js"></script>
+</body>
+</html>

@@ -65,14 +65,14 @@ a {
     text-align: center;
     
     /* ============== 背景圖片設定 ============== */
-    background-image: url('../assets/images/hero-bg.jpg'); /* <-- 請確認您的圖片路徑! */
-    background-size: cover; /* 圖片滿版覆蓋 */
-    background-position: center center; /* 圖片中心位於區塊中心 */
-    background-repeat: no-repeat; /* 避免圖片重複 */
+    background-image: url('../assets/images/hero-bg.jpg'); 
+    background-size: cover; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
     
     /* 疊加一層暗色濾鏡，確保 Logo 文字可讀性 */
-    background-color: rgba(0, 0, 0, 0.6); /* 疊加的暗色基底 */
-    background-blend-mode: overlay; /* 讓圖片與暗色混合，使整體變暗 */
+    background-color: rgba(0, 0, 0, 0.6); 
+    background-blend-mode: overlay; 
     /* ======================================== */
 }
 
@@ -89,7 +89,7 @@ a {
     margin: 20px auto 0;
 }
 
-/* --- Logo 動畫相關樣式 (保持不變) --- */
+/* --- Logo 動畫相關樣式 --- */
 #main-logo-container {
     position: relative;
     width: 500px; 
@@ -107,6 +107,8 @@ a {
     opacity: 0;
     color: white;
     transition: opacity 0.5s ease-out 0.5s;
+    white-space: pre-line; /* 讓 <br> 標籤生效 */
+    letter-spacing: 0.25em; /* 調整字元間距 */
 }
 
 #main-logo-container.loaded #main-logo {
@@ -134,7 +136,7 @@ a {
 
 
 /* ==================================== */
-/* 3. 功能區塊與按鈕 (動畫相關屬性保持不變)    */
+/* 3. 功能區塊與按鈕 (核心樣式與動畫)    */
 /* ==================================== */
 #features-section {
     padding: 80px 10%;
@@ -185,7 +187,37 @@ a {
     transform: scale(0.98);
 }
 
-/* --- 按鈕動畫相關 (保持不變) --- */
+/* --- 未完成功能按鈕提示 (新增) --- */
+.disabled-feature {
+    position: relative;
+    cursor: default !important; /* 將滑鼠指針改為預設，表示不可點擊 */
+}
+
+/* 懸停時的紅色背景 */
+.disabled-feature:hover {
+    background-color: #900; /* 鮮紅色 */
+    box-shadow: 0 0 15px rgba(153, 0, 0, 0.5); 
+}
+
+/* 隱藏 button-text，替換為提示文字 */
+.disabled-feature .button-text {
+    opacity: 0 !important;
+}
+
+/* 顯示「未完成」提示文字 */
+.disabled-feature:after {
+    content: "未完成";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5em;
+    color: white;
+    opacity: 1;
+    z-index: 11; /* 確保在任何動畫之上 */
+}
+
+/* --- 按鈕動畫相關 (保持 V5 結構) --- */
 .feature-button .button-text {
     position: relative;
     opacity: 0; 
