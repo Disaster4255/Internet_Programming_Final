@@ -204,9 +204,9 @@ a {
     opacity: 0 !important;
 }
 
-/* 顯示「未完成」提示文字 */
+/* 顯示「敬請期待」提示文字 */
 .disabled-feature:after {
-    content: "未完成";
+    content: "敬請期待";
     position: absolute;
     top: 50%;
     left: 50%;
