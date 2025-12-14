@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>電子桌球 (Pong)</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: #121212; /* 深色背景 */
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        #pongCanvas {
+            border: 5px solid white;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🎮 電子桌球 (Pong) </h1>
+    <p>使用 **W (上)** 和 **S (下)** 控制左邊的球拍。</p>
+    
+    <canvas id="pongCanvas" width="600" height="400"></canvas>
+
+    <script src="js/pong.js"></script>
+</body>
+</html>

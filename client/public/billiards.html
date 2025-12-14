@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>電子撞球 (8-Ball)</title>
+    <link rel="stylesheet" href="css/style.css"> 
+    <style>
+        /* 頁面專屬樣式，確保撞球桌居中 */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: #121212;
+            color: white;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        #billiardsCanvas {
+            /* 撞球桌的顏色和邊框 */
+            background-color: #006633; /* 綠色桌布 */
+            border: 15px solid #8B4513; /* 深色木質邊框 */
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            margin-top: 10px;
+        }
+        #controls {
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🎱 電子撞球 (八號球 8-Ball)</h1>
+    <div id="controls">
+        <p>1. **點擊並拖曳滑鼠**：設定球桿的方向和力度。</p>
+        <p>2. **放開滑鼠**：擊球！目標是將黑球撞入袋中。</p>
+    </div>
+    
+    <canvas id="billiardsCanvas" width="900" height="450"></canvas>
+
+    <script src="js/billiards.js"></script>
+</body>
+</html>
